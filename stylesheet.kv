@@ -1,0 +1,55 @@
+#:import Factory kivy.factory.Factory
+#:import SideBarDrawer kivyorm.uis.navigations.SideBarDrawer
+
+<NavigationDrawerContainer@MDBoxLayout>:
+	orientation:"vertical"
+	#adaptive_width:True 
+	
+<MainScreen>:
+	id:main_view
+	name:"root_screen"
+	md_bg_color:app.theme_cls.bg_normal
+	navbar:navbar
+	MDToolbar:
+		id:navbar
+		md_bg_color:app.theme_cls.primary_color
+		pos_hint:{"center_x":0.5,"top":1}
+		left_action_items:[[f"{app.icon}",lambda x:None,f"{app.title}"]]
+		right_action_items:[["menu",lambda x:sidebar_drawer._toggle_bar(),"open menu"],["exit-to-app",lambda x:app.show_exiter(),"open menu"]]
+		title:f"[b]{app.title}[/b]"
+		anchor_title:"center"
+	MDNavigationLayout:
+		id:main_layout
+		md_bg_color: navbar.md_bg_color 
+		size_hint:(1,None)
+		height:root.height - navbar.height
+		#y:root.height - self.height - navbar.height - dp(2)
+		x:navbar.height
+		ScreenManager:
+			id:main_screens_manager
+			MDScreen:
+				name:"screen one"
+				#md_bg_color:(0,0,1,1)
+				MDLabel:
+					text:self.parent.name
+					halign:"center"
+					adaptive_height:True 
+					font_style:"H4"
+					theme_text_color:"ContrastParentBackground" 
+					pos_hint:{"top":0.9}
+				#MDBoxLayout:
+					#orientation:"vertical"
+					#size_hint_y:0.65
+					#pos_hint:{"center_x":0.5,"top":0.85}
+					#ColorPicker:
+						
+		SideBarDrawer:
+			id: sidebar_drawer
+			static_on_device:"tablet_desktop_only"
+			NavigationDrawerContainer:
+				id:sidebar_items_wrapper
+				FitImage:
+					source:app.icon
+					size_hint_y:0.45
+        
+MainScreen:
