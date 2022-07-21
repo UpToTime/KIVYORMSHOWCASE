@@ -1,3 +1,3 @@
 # kivyorm
-Simple orm used together with kivy framework
+Simple orm wrapper with web-like form inputs used together with kivy framework
 And kivymd.
